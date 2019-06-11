@@ -13,7 +13,8 @@ import {
   View
 } from 'react-native';
 
-import Logo from './Logo';
+import Logo from '../components/Logo';
+import Form from '../components/Form';
 
 
 
@@ -23,6 +24,7 @@ export default class Login extends Component<Props> {
     return (
       <View style={styles.container}>
         <Logo/>
+        <Form/>
       </View>
     );
   }
@@ -33,6 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#455a64',
     flex:1,
     alignItems:'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginVertical:5
   }
 });

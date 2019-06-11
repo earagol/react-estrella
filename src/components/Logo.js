@@ -20,8 +20,7 @@ export default class Logo extends Component<{}> {
     return (
         <View style={styles.container}>
           <Image 
-            style={{width: 40, height: 70}}
-            source={{uri: 'https://png.pngtree.com/element_origin_min_pic/16/11/25/f71fd72c068a485a289f5f8d45a34086.jpg'}}
+            source={require('../images/logo.png')}
           />
           <Text style={styles.logoText}>Welcome</Text>
         </View>
