@@ -9,24 +9,21 @@
 import React, {Component} from 'react';
 import {
   StyleSheet, 
-  View,
-  StatusBar
+  Text, 
+  View
 } from 'react-native';
 
-import Routes from './src/Routes';
+import Logo from '../components/Logo';
+import Form from '../components/Form';
 
 
 
 type Props = {};
-export default class App extends Component<Props> {
+export default class Menu extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar 
-          backgroundColor="#1c313a" 
-          barStyle="light-content" 
-          />
-          <Routes/>
+        <Text>Menuuuu</Text>
       </View>
     );
   }
@@ -37,6 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#455a64',
     flex:1,
     alignItems:'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginVertical:5
   }
 });
