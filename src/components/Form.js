@@ -15,7 +15,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 
 export default class Form extends Component<{}> {
 
@@ -41,7 +41,7 @@ export default class Form extends Component<{}> {
           />
 
           <TouchableOpacity onPress={this.login} style={styles.button}>
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Loginl</Text>
           </TouchableOpacity>
 
         </View>

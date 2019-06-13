@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import Routes from './src/Routes';
+//import Login from './src/pages/Login';
 
 
 

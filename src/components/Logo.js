@@ -22,7 +22,7 @@ export default class Logo extends Component<{}> {
           <Image 
             source={require('../images/logo.png')}
           />
-          <Text style={styles.logoText}>Welcome</Text>
+          <Text style={styles.logoText}>Welcomed</Text>
         </View>
     );
   }

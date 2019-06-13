@@ -13,10 +13,6 @@ import {
   View
 } from 'react-native';
 
-import Logo from '../components/Logo';
-import Form from '../components/Form';
-
-
 
 type Props = {};
 export default class Menu extends Component<Props> {
@@ -31,10 +27,8 @@ export default class Menu extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#455a64',
     flex:1,
     alignItems:'center',
-    justifyContent:'center',
-    marginVertical:5
+    justifyContent:'center'
   }
 });
