@@ -11,11 +11,11 @@ const prefix = Platform.OS === 'android' ? 'mychat://mychat/' : 'mychat://';
 export default class Routes extends Component<{}> {
 	render() {
 		return(
-			<Router uriPrefix={prefix}>
-			    <Stack key="root">
+			<Router>
+			    <Scene key="root" hideNavBar = {true}>
 			      <Scene key="login" component={Login} title="Login" initial={true} />
 			      <Scene key="menu" component={Menu} title="Menu"/>
-			    </Stack>
+			    </Scene>
 			</Router>
 			)
 	}

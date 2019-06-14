@@ -12,25 +12,83 @@ import {
   Text, 
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid,
+  Alert,
+  ActivityIndicator
 } from 'react-native';
+
+// a component that calls the imperative ToastAndroid API
+const Toast = (props) => {
+  if (props.visible) {
+    ToastAndroid.showWithGravityAndOffset(
+      props.message,
+      ToastAndroid.LONG,
+      ToastAndroid.BOTTOM,
+      25,
+      50,
+    );
+    return null;
+  }
+  return null;
+};
+
 
 import { Actions } from 'react-native-router-flux';
 
 export default class Form extends Component<{}> {
 
-  login() {
-    Actions.menu();
+  state = {visible:false};
+  sign = false;
+
+  constructor(props) {
+    super(props);
   }
+
+  login = () => {
+    
+    console.log(this.state.usuario,this.state.password);
+    
+    //Hacer request a api login estrella
+    if(this.state.usuario == 'admin' && this.state.password == 1234){
+      this.sign = true;
+    }
+
+    // console.log(usuario);
+    if(this.sign){
+      Actions.menu();
+    }else{
+      this.setState({
+        visible: true,
+        usuario: '',//no funciona
+        password: ''//no funciona
+      },
+      () => {
+        setInterval(() => (
+          this.setState({
+            visible: false
+          })
+        ), 3000);
+      }
+      );
+    }
+    
+  }
+
+
+  
 
   render() {
     return (
+        
         <View style={styles.container}>
-          <TextInput 
+          <Toast visible={this.state.visible} message="Usuario o contraseña incorrectos." />
+          <TextInput
               style={styles.inputBox}
               underlineColorAndroid='rgba(0,0,0,0)'
               placeholder='Usuario'
               placeholderTextColor='#ffffff'
+              onChangeText={(usuario) => this.setState({usuario})}
             />
 
           <TextInput 
@@ -38,10 +96,11 @@ export default class Form extends Component<{}> {
             underlineColorAndroid='rgba(0,0,0,0)'
             placeholder='Password'
             placeholderTextColor='#ffffff'
+            onChangeText={(password) => this.setState({password})}
           />
 
           <TouchableOpacity onPress={this.login} style={styles.button}>
-            <Text style={styles.buttonText}>Loginl</Text>
+            <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
 
         </View>
