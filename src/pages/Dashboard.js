@@ -16,9 +16,10 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+import Menu from '../components/Menu';
 
 type Props = {};
-export default class Menu extends Component<Props> {
+export default class Dashboard extends Component<Props> {
 
   logout = () => {
      AsyncStorage.removeItem('user');
@@ -27,12 +28,7 @@ export default class Menu extends Component<Props> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Menuuuu</Text>
-        <TouchableOpacity onPress={this.logout} style={styles.button}>
-            <Text style={styles.buttonText}>Logout</Text>
-          </TouchableOpacity>
-      </View>
+      <Menu/>
     );
   }
 }

@@ -34,7 +34,6 @@ const Toast = (props) => {
   return null;
 };
 
-
 import { Actions } from 'react-native-router-flux';
 
 export default class Form extends Component<{}> {
@@ -46,6 +45,7 @@ export default class Form extends Component<{}> {
 
     this.state = {
       visible:false,
+      isLoading:false,
       username:'',
       password:''
     };
@@ -59,23 +59,34 @@ export default class Form extends Component<{}> {
       var value = await AsyncStorage.getItem('user');
       console.log('aqui',value);
       if(value !== null) {
-        Actions.menu();
+        Actions.dashboard();
       }
   }
 
   login = () => {
+
+    this.setState({isLoading: true},
+      () => {
+        setInterval(() => (
+          this.setState({
+            isLoading: false
+          })
+        ), 3000);
+      }
+      ); 
     
-    console.log(this.state.usuario,this.state.password);
+    // //console.log(this.state.usuario,this.state.password);
     
     //Hacer request a api login estrella
     if(this.state.usuario == 'admin' && this.state.password == 1234){
       AsyncStorage.setItem('user',this.state.usuario);
-      Actions.menu();
+      Actions.dashboard();
     }else{
+      // this.setState({isLoading: false}); 
+      this.usuario.clear();
+      this.password.clear();
       this.setState({
-        visible: true,
-        usuario: '',//no funciona
-        password: ''//no funciona
+        visible: true
       },
       () => {
         setInterval(() => (
@@ -133,12 +144,21 @@ export default class Form extends Component<{}> {
   
 
   render() {
+
+    if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
+
     return (
-        
         <View style={styles.container}>
           <Toast visible={this.state.visible} message="Usuario o contraseña incorrectos." />
           <TextInput
               style={styles.inputBox}
+              ref={input => { this.usuario = input }}
               underlineColorAndroid='rgba(0,0,0,0)'
               placeholder='Usuario'
               placeholderTextColor='#ffffff'
@@ -147,6 +167,7 @@ export default class Form extends Component<{}> {
 
           <TextInput 
             style={styles.inputBox}
+            ref={input => { this.password = input }}
             underlineColorAndroid='rgba(0,0,0,0)'
             placeholder='Password'
             placeholderTextColor='#ffffff'

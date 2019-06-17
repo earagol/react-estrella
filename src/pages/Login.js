@@ -23,8 +23,12 @@ export default class Login extends Component<Props> {
   render() {
     return ( 
       <View style={styles.container}>
-        <Logo/>
-        <Form/>
+        <View style={{flex: 1}} >
+          <Logo/>
+        </View>
+        <View style={{flex: 2}} >
+          <Form/>
+        </View>
       </View>
     );
   }
@@ -36,6 +40,6 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent:'center',
-    marginVertical:5
+    // marginVertical:5
   }
 });
