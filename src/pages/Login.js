@@ -21,7 +21,7 @@ import Form from '../components/Form';
 type Props = {};
 export default class Login extends Component<Props> {
   render() {
-    return (
+    return ( 
       <View style={styles.container}>
         <Logo/>
         <Form/>

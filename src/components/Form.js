@@ -15,7 +15,8 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  AsyncStorage
 } from 'react-native';
 
 // a component that calls the imperative ToastAndroid API
@@ -38,11 +39,28 @@ import { Actions } from 'react-native-router-flux';
 
 export default class Form extends Component<{}> {
 
-  state = {visible:false};
-  sign = false;
+  
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      visible:false,
+      username:'',
+      password:''
+    };
+  }
+
+  componentDidMount() {
+    this._loadInitialState().done();
+  }
+
+  _loadInitialState = async () => {
+      var value = await AsyncStorage.getItem('user');
+      console.log('aqui',value);
+      if(value !== null) {
+        Actions.menu();
+      }
   }
 
   login = () => {
@@ -51,11 +69,7 @@ export default class Form extends Component<{}> {
     
     //Hacer request a api login estrella
     if(this.state.usuario == 'admin' && this.state.password == 1234){
-      this.sign = true;
-    }
-
-    // console.log(usuario);
-    if(this.sign){
+      AsyncStorage.setItem('user',this.state.usuario);
       Actions.menu();
     }else{
       this.setState({
@@ -72,6 +86,46 @@ export default class Form extends Component<{}> {
       }
       );
     }
+
+
+    //////////////////////////Ejemplo de llamado a api login/////
+
+    // fecth('http://192.98.89.87/estrella/api/usuarios/token',{
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     username: this.state.usuario,
+    //     password: this.state.password
+    //   })
+    // })
+    // .then( (response) => response.json() )
+    // .then( (res) => {
+
+    //   if(res.success){
+    //     AsyncStorage.setItem('user',this.state.usuario);
+    //     Actions.menu();
+    //   }else{
+    //     this.setState({
+    //       visible: true,
+    //       usuario: '',//no funciona
+    //       password: ''//no funciona
+    //     },
+    //     () => {
+    //       setInterval(() => (
+    //         this.setState({
+    //           visible: false
+    //         })
+    //       ), 3000);
+    //     }
+    //   }
+
+    // });
+
+
+    //////////////////////////
     
   }
 
