@@ -15,15 +15,12 @@ import {
   AsyncStorage
 } from 'react-native';
 
-import { Actions } from 'react-native-router-flux';
-import Menu from '../components/Menu';
-
 type Props = {};
-export default class Dashboard extends Component<Props> {
+export default class Dashboard2 extends Component<Props> {
 
   render() {
     return (
-      <Text>Dashboar 1</Text>
+      <Text>Dashboard 12</Text>
     );
   }
 }

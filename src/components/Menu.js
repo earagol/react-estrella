@@ -11,52 +11,50 @@ import {
   StyleSheet, 
   Text, 
   View,
-  Image,
-  Easing
+  AsyncStorage
 } from 'react-native';
 
-import Drawer from 'react-native-drawer-menu';
-// import { Drawer } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
+import { Content, List, ListItem, Thumbnail } from 'native-base';
 
 
 export default class Menu extends Component<{}> {
-  
   // in render function
+  // logout = () => {
+  //    AsyncStorage.removeItem('user');
+  //    Actions.login();
+  // }
+
   render() {
-    // prepare your drawer content
-    var drawerContent = (<View style={styles.drawerContent}>
-      <View style={styles.leftTop}/>
-      <View style={styles.leftBottom}>
-        <View><Text>Drawer Content</Text></View>
-      </View>
-    </View>);
-    // customize drawer's style (Optional)
-    var customStyles = {
-      drawer: {
-        shadowColor: '#000',
-        shadowOpacity: 0.4,
-        shadowRadius: 10
-      },
-      mask: {}, // style of mask if it is enabled
-      main: {} // style of main board
-    };
     return (
-      <Drawer
-        style={styles.container}
-        drawerWidth={300}
-        drawerContent={drawerContent}
-        type={Drawer.types.Overlay}
-        customStyles={{drawer: styles.drawer}}
-        drawerPosition={Drawer.positions.Right}
-        onDrawerOpen={() => {console.log('Drawer is opened');}}
-        onDrawerClose={() => {console.log('Drawer is closed')}}
-        easingFunc={Easing.ease}
-      >
-        <View style={styles.content}>
-          <Text>{Object.values(Drawer.positions).join(' ')}</Text>
-          <Text>{Object.values(Drawer.types).join(' ')}</Text>
+      <View style={{flex:1}}>
+        <View style={{flex:1, backgroundColor:'#2c3e50',justifyContent:'center',alignItems:'center'}}>
+          <Thumbnail
+            source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsW6lc54VRQxJKTl8FE4EenqslaAqGofSJ1ds7a-AiUZQIRQE2Pg'}}
+            large
+          />
+          <Text style={{color:'#fff',fontSize: 15, marginTop: 10}}>Erisk Aragol</Text>
         </View>
-      </Drawer>
+
+        <View style={{flex:2}}>
+          <Content>
+            <List>
+              <ListItem onPress={ () => { Actions.dashboard() } }>
+                <Text>Menu 1</Text>
+              </ListItem>
+
+              <ListItem onPress={ () => { Actions.dashboard2() } }>
+                <Text>Menu 2</Text>
+              </ListItem>
+
+              <ListItem>
+                <Text>Cerrar Sesión</Text>
+              </ListItem>
+            </List>
+          </Content>
+        </View>
+
+      </View>
     );
   }
 
