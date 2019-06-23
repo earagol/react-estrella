@@ -20,10 +20,10 @@ import { Content, List, ListItem, Thumbnail } from 'native-base';
 
 export default class Menu extends Component<{}> {
   // in render function
-  // logout = () => {
-  //    AsyncStorage.removeItem('user');
-  //    Actions.login();
-  // }
+  logout = () => {
+     AsyncStorage.removeItem('user');
+     Actions.login();
+  }
 
   render() {
     return (
@@ -40,14 +40,14 @@ export default class Menu extends Component<{}> {
           <Content>
             <List>
               <ListItem onPress={ () => { Actions.dashboard() } }>
-                <Text>Menu 1</Text>
+                <Text>Dashboard</Text>
               </ListItem>
 
               <ListItem onPress={ () => { Actions.dashboard2() } }>
                 <Text>Menu 2</Text>
               </ListItem>
 
-              <ListItem>
+              <ListItem onPress={this.logout} >
                 <Text>Cerrar Sesión</Text>
               </ListItem>
             </List>

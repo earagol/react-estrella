@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import {Router, Stack, Scene } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'native-base';
 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -18,10 +20,10 @@ const prefix = Platform.OS === 'android' ? 'mychat://mychat/' : 'mychat://';
 // 	}
 // }
 
-
+// const MenuIcon = <Icon name='home' />;
 const MenuIcon = () => {
 	return (
-		<Icon name='menu' size={30} />
+		<Icon name="rocket" size={30} color="#900" />
 	)
 }
 export default class Routes extends Component<{}> {
@@ -29,17 +31,17 @@ export default class Routes extends Component<{}> {
 		return(
 			<Router>
 			    <Scene key="root" hideNavBar = {true}>
-			      <Scene key="login" component={Login} title="Login" />
+			      <Scene key="login" component={Login} title="Login" initial/>
 
-			      <Scene initial
+			      <Scene 
 			      key='drawer'
 			      drawer
-			      contentComponent={Menu}
+			      contentComponent={Menu}  
 			      drawerIcon={MenuIcon}
 			      drawerWidth={300}
 			      hideNavBar
 			      >
-			      <Scene key="dashboard" component={Dashboard} title="Dashboard 1"/>
+			      <Scene key="dashboard" component={Dashboard} title="Dashboard"/>
 			      <Scene key="dashboard2" component={Dashboard2} title="Dashboard 2"/>
 			      </Scene>
 

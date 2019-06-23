@@ -94,46 +94,51 @@ export default class Form extends Component<{}> {
             visible: false
           })
         ), 3000);
-      }
-      );
+      });
     }
 
 
     //////////////////////////Ejemplo de llamado a api login/////
 
-    // fecth('http://192.98.89.87/estrella/api/usuarios/token',{
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     username: this.state.usuario,
-    //     password: this.state.password
-    //   })
-    // })
-    // .then( (response) => response.json() )
-    // .then( (res) => {
+    fetch('http://104.248.208.143/estrella/api/usuarios/token',{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: this.state.usuario,
+        password: this.state.password
+      })
+    })
+    .then( (response) => response.json() )
+    .then( (res) => {
 
-    //   if(res.success){
-    //     AsyncStorage.setItem('user',this.state.usuario);
-    //     Actions.menu();
-    //   }else{
-    //     this.setState({
-    //       visible: true,
-    //       usuario: '',//no funciona
-    //       password: ''//no funciona
-    //     },
-    //     () => {
-    //       setInterval(() => (
-    //         this.setState({
-    //           visible: false
-    //         })
-    //       ), 3000);
-    //     }
-    //   }
+      // console.log(res);
+      if(res.success){
+        AsyncStorage.setItem('user',this.state.usuario);
+        Actions.dashboard();
+      }else{
+        // this.setState({isLoading: false}); 
+        this.usuario.clear();
+        this.password.clear();
+        this.setState({
+          visible: true
+        },
+        () => {
+          setInterval(() => (
+            this.setState({
+              visible: false
+            })
+          ), 3000);
+        });
+      }
 
-    // });
+
+
+      
+
+    });
 
 
     //////////////////////////
